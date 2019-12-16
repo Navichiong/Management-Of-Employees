@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="employee.dao.EmployeeMapper">
+    <resultMap id="BaseResultMap" type="employee.pojo.Employee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="empname" jdbcType="VARCHAR" property="empname"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="gender" jdbcType="INTEGER" property="gender"/>
+        <result column="d_id" jdbcType="INTEGER" property="dId"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, empname, email, gender, d_id
+    </sql>
+    <select id="selectByExample" parameterType="employee.pojo.EmployeeExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from employee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from employee
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from employee
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="employee.pojo.EmployeeExample">
+        delete from employee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="employee.pojo.Employee">
+        insert into employee (id, empname, email, gender, d_id)
+        values (#{id,jdbcType=INTEGER},
+                #{empname,jdbcType=VARCHAR},
+                #{email,jdbcType=VARCHAR},
+                #{gender,jdbcType=INTEGER},
+                #{dId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="employee.pojo.Employee">
+        insert into employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="empname != null">
+                empname,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="dId != null">
+                d_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="empname != null">
+                #{empname,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="dId != null">
+                #{dId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="employee.pojo.EmployeeExample" resultType="java.lang.Long">
+        select count(*) from employee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update employee
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.empname != null">
+                empname = #{record.empname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null">
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gender != null">
+                gender = #{record.gender,jdbcType=INTEGER},
+            </if>
+            <if test="record.dId != null">
+                d_id = #{record.dId,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update employee
+        set id = #{record.id,jdbcType=INTEGER},
+        empname = #{record.empname,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
+        gender = #{record.gender,jdbcType=INTEGER},
+        d_id = #{record.dId,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="employee.pojo.Employee">
+        update employee
+        <set>
+            <if test="empname != null">
+                empname = #{empname,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="dId != null">
+                d_id = #{dId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="employee.pojo.Employee">
+        update employee
+        set empname = #{empname,jdbcType=VARCHAR},
+            email   = #{email,jdbcType=VARCHAR},
+            gender  = #{gender,jdbcType=INTEGER},
+            d_id    = #{dId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <sql id="WithDept_Column_List">
+        e.`id`, e.`empname`, e.`email`, e.`gender`, e.`d_id`, d.`dep_id`, d.`dept_name`
+    </sql>
+
+    <resultMap id="BaseResultMapWithDept" type="employee.pojo.Employee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="empname" jdbcType="VARCHAR" property="empname"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="gender" jdbcType="INTEGER" property="gender"/>
+        <result column="d_id" jdbcType="INTEGER" property="dId"/>
+        <association property="department" javaType="employee.pojo.Department">
+            <id property="depId" column="dep_id"/>
+            <result property="deptName" column="dept_name"/>
+        </association>
+    </resultMap>
+
+    <select id="selectByPrimaryKeyWithDept" resultMap="BaseResultMapWithDept">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `employee` e LEFT JOIN `department` d ON e.`d_id` = d.`dep_id`
+        WHERE e.id = #{id}
+    </select>
+
+    <select id="selectByExampleWithDept" resultMap="BaseResultMapWithDept">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="WithDept_Column_List"/>
+        FROM employee e
+        LEFT JOIN department d on e.`d_id`=d.`dep_id`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <title>Bootstrap HelloWorld</title>
+
+        <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+        <script src="static/js/jquery-3.2.1.min.js"></script>
+
+        <!-- Bootstrap -->
+        <link href="static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+        <script src="static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="static/css/bubbles.css">
+        <link rel="stylesheet" href="static/css/login.css">
+        <script src="static/js/login.js"></script>
+    </head>
+    <body>
+
+        <div class="bubbles">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+
+        <form class="login-form">
+
+            <h1>Login</h1>
+
+            <div class="txtb">
+                <input type="text" name="username" id="username" data-toggle="tooltip" data-placement="left" title="用户名只能由3~16位的英文及数字组合" autocomplete="off">
+                <!--<input type="text" name="username"/>-->
+                <span data-placeholder="Username"></span>
+            </div>
+
+            <div class="txtb">
+                <input type="password" name="password" id="password" data-toggle="tooltip" data-placement="left" title="密码只能由6~18位英文及数字组合">
+                <!--<input type="password" name="password"/>-->
+                <span data-placeholder="Password"></span>
+            </div>
+            
+            <div class="txtb">
+                <input type="text" id="text_checkcode" name="checkCode">
+                <span data-placeholder="CheckCode"></span>
+                <img src="/ssm1/checkCode/imgHandle" id="chk_img">
+            </div>
+
+
+            <input type="button" value="Login" class="logbtn">
+
+            <div class="bottom-text">
+                Don't have a account? <a href="register.html">Sign up</a>
+            </div>
+        </form>
+    </body>
+</html>
