@@ -78,10 +78,10 @@ public class UserController {
 
     // 用户登出
     @RequestMapping(value = "/userLogout")
-    public String userLogout(HttpSession session) {
-
+    @ResponseBody
+    public Return userLogout(HttpSession session) {
         session.invalidate();
-        return "redirect:/login_bubble.html";
+        return Return.success();
     }
 
     // 用户修改密码
